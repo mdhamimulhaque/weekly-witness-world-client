@@ -2,26 +2,27 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <div className='mb-5'>
+        <header className='mb-5' style={{ cursor: "pointer" }}>
             <Navbar bg="light" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="#">WWW</Navbar.Brand>
+                    <Link className='nav-link text-bold' to="/">Weekly Witness World</Link>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
-                            className="me-auto my-2 my-lg-0"
+                            className="mx-auto my-2 my-lg-0"
                         >
-                            <Nav.Link href="#action1">Home</Nav.Link>
-                            <Nav.Link href="#action2">News</Nav.Link>
-                            <Nav.Link href="#action3">Contact</Nav.Link>
+                            <Link className='nav-link' to="/">Home</Link>
+                            <Link className='nav-link' to="#action2">News</Link>
+                            <Link className='nav-link' to="/contact">Contact</Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </div>
+        </header>
     );
 };
 
