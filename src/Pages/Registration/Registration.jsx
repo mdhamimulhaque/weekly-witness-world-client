@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 const Registration = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
 
     const [errorMsg, setErrorMsg] = useState('');
+    const [termsChecked, setTermsChecked] = useState(false)
 
     const handleCreateUser = (e) => {
         e.preventDefault();
@@ -16,16 +18,39 @@ const Registration = () => {
         const email = form.email.value;
         const password = form.password.value;
 
+        // ---> create user
         createUser(email, password)
             .then(res => {
                 const user = res.user;
                 console.log("create user successfully", user);
                 form.reset();
+                handleUpdateUserProfile(name, url);
             })
             .catch(err => {
                 setErrorMsg(err.message)
             })
 
+    }
+
+    // ---> handle update user profile
+    const handleUpdateUserProfile = (name, url) => {
+        const profile = {
+            displayName: name,
+            photoURL: url
+        }
+        updateUserProfile(profile)
+            .then(() => {
+                console.log('profile updated')
+            }).catch((error) => {
+                setErrorMsg(error.message)
+            });
+
+    }
+
+    // ---> handle terms and condition check
+    const handleTermsChecked = (e) => {
+        const checkValue = e.target.checked;
+        setTermsChecked(checkValue)
     }
 
     return (
@@ -47,8 +72,16 @@ const Registration = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control name="password" type="password" placeholder="****" />
             </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check
+                    onClick={handleTermsChecked}
+                    type="checkbox"
+                    label={<>Accept <Link to="/terms"> terms and conditions</Link></>}
+
+                />
+            </Form.Group>
             <p className='my-2 text-danger'><small>{errorMsg}</small></p>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" disabled={!termsChecked}>
                 Submit
             </Button>
         </Form>

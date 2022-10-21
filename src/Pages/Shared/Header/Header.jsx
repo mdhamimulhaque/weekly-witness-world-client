@@ -36,7 +36,7 @@ const Header = () => {
                     </Navbar.Collapse>
                     <div className="user_info">
                         {user?.photoURL ?
-                            <img style={{ height: "30px", borderRadius: "50%" }} src={user?.photoURL} alt="" />
+                            <img style={{ height: "30px", width: "30px", borderRadius: "50%" }} src={user?.photoURL} alt="" />
                             : <FaMehRollingEyes />
                         }
 
@@ -44,7 +44,7 @@ const Header = () => {
                             user?.uid ?
                                 <>
                                     <span className='ms-2'>{user?.displayName}</span>
-                                    <Button onClick={handleLogOut} variant="danger" size="sm">
+                                    <Button className='ms-2' onClick={handleLogOut} variant="danger" size="sm">
                                         Log Out
                                     </Button>
                                 </>

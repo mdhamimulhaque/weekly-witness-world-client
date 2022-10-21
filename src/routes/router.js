@@ -6,6 +6,7 @@ import Home from "../Pages/Home/Home";
 import LogIn from "../Pages/LogIn/LogIn";
 import NewsDetails from "../Pages/NewsDetails/NewsDetails";
 import Registration from "../Pages/Registration/Registration";
+import TermsAndConditions from "../Pages/TermsAndConditions/TermsAndConditions";
 import PrivateRoute from "./PrivateRoute";
 
 
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
             {
                 path: '/registration',
                 element: <Registration />
+            },
+            {
+                path: '/terms',
+                element: <TermsAndConditions />
             }
         ]
 
