@@ -11,13 +11,15 @@ import { Button } from 'react-bootstrap';
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
 
+
     const handleLogOut = () => {
         logOut()
             .then(() => {
                 console.log("logout successfully")
             }).catch((error) => {
-                console.error(error)
+                console.log(error)
             });
+
     }
     return (
         <header className='mb-5' style={{ cursor: "pointer" }}>
@@ -26,40 +28,32 @@ const Header = () => {
                     <Link className='nav-link text-bold' to="/">Weekly Witness World</Link>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="mx-auto my-2 my-lg-0"
-                        >
+                        <Nav className="mx-auto my-2 my-lg-0">
                             <Link className='nav-link' to="/">Home</Link>
                             <Link className='nav-link' to="/">News</Link>
                             <Link className='nav-link' to="/contact">Contact</Link>
                         </Nav>
                     </Navbar.Collapse>
-                    {
-                        user?.email ?
-                            <>
-                                {user?.photoURL ?
-                                    <img style={{ height: "40px", borderRadius: "50%" }} src={user?.photoURL} alt="" />
-                                    : <FaMehRollingEyes />
-                                }
-                                <span className='me-2'>{user?.displayName}</span>
-                                <Button onClick={handleLogOut} variant="danger" size="sm">
-                                    Log Out
-                                </Button>
-                            </>
-                            : <>
-                                <Button className='mx-1 text-white' variant="info" size="sm">
-                                    Registration
-                                </Button>
-                                <Button className='mx-1 text-white' variant="info" size="sm">
-                                    Log In
-                                </Button>
-                            </>
-                    }
+                    <div className="user_info">
+                        {user?.photoURL ?
+                            <img style={{ height: "30px", borderRadius: "50%" }} src={user?.photoURL} alt="" />
+                            : <FaMehRollingEyes />
+                        }
 
-
-
-
-
+                        {
+                            user?.uid ?
+                                <>
+                                    <span className='ms-2'>{user?.displayName}</span>
+                                    <Button onClick={handleLogOut} variant="danger" size="sm">
+                                        Log Out
+                                    </Button>
+                                </>
+                                : <>
+                                    <Link to="/registration"><Button className='mx-1 text-white' variant="info" size="sm">Registration</Button></Link>
+                                    <Link to="/login"><Button className='mx-1 text-white' variant="info" size="sm">Log In</Button></Link>
+                                </>
+                        }
+                    </div>
                 </Container>
             </Navbar>
         </header>

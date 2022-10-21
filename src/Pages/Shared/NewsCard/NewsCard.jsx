@@ -28,8 +28,8 @@ const NewsCard = ({ news }) => {
             </Card.Header>
             <Card.Img className='p-3' variant="top" src={image_url} />
             <Card.Body>
+                <h2>{title}</h2>
                 <Card.Text>
-                    <h2>{title}</h2>
                     {
                         details.length > 200 ?
                             <span>{details.slice(0, 250)} <Link to={`/news/${_id}`}> Read more...</Link></span>

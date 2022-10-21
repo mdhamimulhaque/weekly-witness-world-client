@@ -3,7 +3,9 @@ import Main from "../layout/Main";
 import Categories from "../Pages/Categories/Categories";
 import Contact from "../Pages/Contact/Contact";
 import Home from "../Pages/Home/Home";
+import LogIn from "../Pages/LogIn/LogIn";
 import NewsDetails from "../Pages/NewsDetails/NewsDetails";
+import Registration from "../Pages/Registration/Registration";
 
 
 export const router = createBrowserRouter([
@@ -29,6 +31,14 @@ export const router = createBrowserRouter([
             {
                 path: '/contact',
                 element: <Contact />
+            },
+            {
+                path: '/login',
+                element: <LogIn />
+            },
+            {
+                path: '/registration',
+                element: <Registration />
             }
         ]
 
