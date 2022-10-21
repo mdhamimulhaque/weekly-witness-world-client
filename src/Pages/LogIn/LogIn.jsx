@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { AuthContext } from '../../context/AuthProvider';
 
 const LogIn = () => {
     const { loginUser } = useContext(AuthContext);
+
+    const [errorMsg, setErrorMsg] = useState('');
 
     const navigate = useNavigate()
 
@@ -19,11 +21,11 @@ const LogIn = () => {
                 const user = res.user;
                 console.log("Login success", user);
                 form.reset();
-                navigate("/")
+                navigate("/");
 
             })
             .catch(err => {
-                console.error(err)
+                setErrorMsg(err.message)
             })
     }
 
@@ -38,6 +40,7 @@ const LogIn = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control name="password" type="password" placeholder="****" />
             </Form.Group>
+            <p className='my-2 text-danger'><small>{errorMsg}</small></p>
             <Button variant="primary" type="submit">
                 Submit
             </Button>
