@@ -16,7 +16,7 @@ const Header = () => {
                             className="mx-auto my-2 my-lg-0"
                         >
                             <Link className='nav-link' to="/">Home</Link>
-                            <Link className='nav-link' to="#action2">News</Link>
+                            <Link className='nav-link' to="/">News</Link>
                             <Link className='nav-link' to="/contact">Contact</Link>
                         </Nav>
                     </Navbar.Collapse>
