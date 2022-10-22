@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 const Registration = () => {
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { createUser, updateUserProfile, emailVerify } = useContext(AuthContext);
 
     const [errorMsg, setErrorMsg] = useState('');
     const [termsChecked, setTermsChecked] = useState(false)
@@ -25,9 +26,12 @@ const Registration = () => {
                 console.log("create user successfully", user);
                 form.reset();
                 handleUpdateUserProfile(name, url);
+                handleEmailVerify();
+                toast.success('Please go to your email and verify it')
             })
             .catch(err => {
-                setErrorMsg(err.message)
+                setErrorMsg(err.message);
+                console.error(err)
             })
 
     }
@@ -43,14 +47,24 @@ const Registration = () => {
                 console.log('profile updated')
             }).catch((error) => {
                 setErrorMsg(error.message)
+                console.error(error)
             });
-
     }
 
     // ---> handle terms and condition check
     const handleTermsChecked = (e) => {
         const checkValue = e.target.checked;
         setTermsChecked(checkValue)
+    }
+
+    // ---> handle email verify
+    const handleEmailVerify = () => {
+        emailVerify()
+            .then(() => {
+                console.log('email verified request')
+            }).catch((error) => {
+                setErrorMsg(error.message)
+            });
     }
 
     return (
