@@ -76,6 +76,7 @@ const AuthProvider = ({ children }) => {
         createUser,
         loginUser,
         loading,
+        setLoading,
         updateUserProfile,
         emailVerify
     }

@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 const LogIn = () => {
-    const { loginUser } = useContext(AuthContext);
+    const { loginUser, setLoading } = useContext(AuthContext);
 
     const [errorMsg, setErrorMsg] = useState('');
 
@@ -32,6 +32,9 @@ const LogIn = () => {
             })
             .catch(err => {
                 setErrorMsg(err.message)
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }
 
